@@ -1,15 +1,10 @@
-import numpy as np
+import torch
 
-def calculate_eigenvalues(matrix: list[list[float|int]]) -> list[float]:
-	trace = matrix[0][0] + matrix[1][1]
-	det = matrix[0][0] * matrix[1][1] - matrix[1][0] * matrix[0][1]
-
-    eigenvalues = []
-    discriminant = trace ** 2 - 4 * det
-    
-    # 2. 근의 공식 부호 수정 및 괄호/콜론(:) 보완
-    if discriminant >= 0:
-        eigenvalues.append(1/2 * (trace + np.sqrt(discriminant)))
-        eigenvalues.append(1/2 * (trace - np.sqrt(discriminant)))
-
-	return eigenvalues
+def calculate_eigenvalues(matrix: torch.Tensor) -> torch.Tensor:
+    """
+    Compute eigenvalues of a 2x2 matrix using PyTorch.
+    Input: 2x2 tensor; Output: 1-D tensor with the two eigenvalues in descending order (highest to lowest).
+    """
+    # Your implementation here
+    return torch.sort(torch.real(torch.linalg.eigvals(matrix)), descending = True).values
+    pass
